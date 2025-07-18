@@ -3,4 +3,5 @@
 只是小練習
 
 1. [durm-kit](./01-durm-kit) - 20250716
-2. [clock](./02-clock) - 202507/17
+2. [clock](./02-clock) - 20250717
+3. [random-color-generator](./03-random-color-generator) - 20250718
