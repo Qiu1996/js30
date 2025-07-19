@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Qiu YaQi">
+        <title>MyTodo</title>
+        <link rel="stylesheet" href="./src/style/style.css">
+    </head>
+    <body>
+        <script type="module" src="./src/script/app.js"></script>
+        <div
+            x-data="todo_form"
+        >
+        <div
+            x-show="status !== 'loginOn'"
+            >
+            <form
+                    x-show="status == 'register'"
+                    class="flex flex-col gap-2 items-center mt-10" action="https://todoo.5xcamp.us/users" method="post"
+                >
+                    <input
+                        x-model.trim="email"
+                        class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="email" placeholder="信箱" name="email"
+                    >
+                    <input
+                        x-model="password"
+                        class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="password" placeholder="密碼" name="password"
+                    >
+                    <input
+                        x-model.trim="nickname"
+                        class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="text" placeholder="暱稱" name="nickname"
+                    >
+                    <button 
+                        :disabled="!allowToSubmit"  
+                        @click.prevent="register" 
+                        :class="allowToSubmit ? 'bg-blue-500 cursor-not-allowed' : 'bg-gray-400 cursor-not-allowed'" 
+                        class="p-1 w-1/2 text-white rounded-md" type="submit">
+                        註冊
+                    </button>
+                    <footer>
+                        已經有帳號？<a
+                            @click="goLogin"
+                            class="text-blue-500" href="#"
+                        >立即登入！</a>
+                    </footer>
+                </form>
+        
+                <form
+                    x-show="status == 'login'"
+                    class="flex flex-col gap-2 items-center mt-10" action="https://todoo.5xcamp.us/users" method="post"
+                >
+                    <input
+                        x-model="email"
+                        class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="email" placeholder="信箱" name="email"
+                    >
+                    <input
+                        x-model="password"
+                        class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="password" placeholder="密碼" name="password"
+                    >
+                    <button 
+                        :disabled="!allowToSubmit" 
+                        :class="allowToSubmit ? 'bg-blue-500 cursor-not-allowed' : 'bg-gray-400 cursor-not-allowed'" 
+                        class="p-1 w-1/2 text-white rounded-md" type="submit" 
+                        @click.prevent="login">
+                        登入
+                    </button>
+                    <footer>
+                        沒有帳號？<a
+                            @click="goRegister"
+                            class="text-blue-500" href="#"
+                        >立即註冊！</a>
+                    </footer>
+                </form>
+            </div>
+            <div
+                x-show="status == 'loginOn'"
+                class="p-10"
+            >
+                <form class="flex gap-2 text-center" action="">
+                    <input
+                        x-model="newTodo"
+                        class="p-1 text-center w-3/4 border-2 border-gray-300 rounded-md" type="text" placeholder="填寫代辦事項"
+                    >
+                    <button
+                        @click.prevent="addTodo"
+                        class="px-5 w-1/4 py-1 bg-blue-500 text-white rounded-md" type="submit"
+                    >新增</button>
+                </form>
+                <ul
+                    class="mt-10 w-full mx-auto"
+                    x-data="todos"
+                >
+                    <template
+                        x-for="(todo, index) in todos"
+                    >
+                        <li class="flex w-full items-center border-2 border-gray-300 text-stone-500 rounded-md p-2 text-lg mb-2">
+                            <div
+                                x-show="editingIndex !== index"
+                                class="flex items-center flex-1 gap-2"
+                            >
+                                <input
+                                    :id="index"
+                                    type="checkbox" class="mx-3"
+                                >
+                                <label
+                                    :for="index"
+                                    x-text="todo.content"
+                                    class="cursor-pointer flex-1"
+                                ></label>
+                                <button 
+                                    :disabled="editingStatus" 
+                                    @click="deleteTodo(todo)" 
+                                    :class="editingIndex !== null ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 cursor-pointer'"  
+                                    class="cursor-pointer px-2 shrink-0 ml-2 py-1 bg-blue-500 text-white rounded-md" type="submit">
+                                    刪除
+                                </button>
+                                <button 
+                                    :disabled="editingStatus" 
+                                    @click="goEditTodo(todo)" 
+                                    :class="editingIndex !== null ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 cursor-pointer'" 
+                                    class="px-2 shrink-0 ml-2 py-1 text-white rounded-md" type="submit">
+                                    編輯
+                                </button>
+                            </div>
+                            <!-- :class="editingIndex !== null ? 'bg-blue-500' : 'bg-gray-400' cursor-not-allowed'" -->
+                            <div
+                                x-show="editingIndex == index"
+                                class="flex items-center flex-1 gap-2"
+                            >
+                                <input
+                                    x-model="editTodo"
+                                    class="inset-shadow-sm p-1 w-full border-1  border-gray-300 rounded-md" type="text" name="editTodo" placeholder="編輯代辦事項"
+                                >
+                                <button 
+                                    @click="cancelEditTodo" 
+                                    class="cursor-pointer px-2 shrink-0 ml-2 py-1 bg-blue-500 text-white rounded-md" type="submit">
+                                    取消
+                                </button>
+                                <button 
+                                    @click="finishEditTodo(todo)" 
+                                    class="cursor-pointer px-2 shrink-0 ml-2 py-1 bg-blue-500 text-white rounded-md" type="submit">
+                                    完成
+                                </button>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+                <input
+                    class="fixed bottom-10 right-10 bg-blue-500 text-white rounded-md px-5 py-1" type="button" value="登出"
+                    @click="logout"
+                >
+            </div>
+        </div>
+
+    </body>
+    </html>
+
+
+
+<!-- https://todoo.5xcamp.us -->
