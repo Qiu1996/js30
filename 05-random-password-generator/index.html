@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Qiu YaQi">
+        <title>Document</title>
+        <link rel="stylesheet" href="./style/style.css">
+        <script type="module" src="./script/all.js"></script>
+    </head>
+    <body>
+        <section>
+            <h1 class="title">密碼產生器</h1>
+            <div class="setLength">
+                <spna>長度</spna>
+                
+                    <input type="range" min="8" max="100" value="34">
+                    <input type="number" min="8" max="100" value="34">  
+                
+            </div>
+            <div class="setToggle">
+                <div>
+                    <label for="num">大寫</label>
+                    <div class="sliderWrap">
+                        <input id="num" type="checkbox" name="">
+                        <div class="sliderInside"></div>
+                    </div>
+                </div>
+                <div>
+                    <label for="num">小寫</label>
+                    <div class="sliderWrap">
+                        <input id="num" type="checkbox" name="">
+                        <div class="sliderInside"></div>
+                    </div>
+                </div>
+                <div>
+                    <label for="num">符號</label>
+                    <div class="sliderWrap">
+                        <input id="num" type="checkbox" name="">
+                        <div class="sliderInside"></div>
+                    </div>
+                </div>
+                <div>
+                    <label for="num">數字</label>
+                    <div class="sliderWrap">
+                        <input id="num" type="checkbox" name="">
+                        <div class="sliderInside"></div>
+                    </div>
+                </div>
+            </div>     
+            <div class="outputWrap">
+                <p>密碼生成</p>
+                <div class="output">
+                    <span>11111111111111111111111111111111</span>
+                </div>
+            </div>
+            <div class="btnWrap">
+                <button>複製密碼</button>
+                <button>刷新密碼</button> 
+            </div>
+
+        </section>
+    </body>
+</html>
