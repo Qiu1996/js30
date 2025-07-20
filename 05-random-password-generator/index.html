@@ -14,17 +14,16 @@
         >
             <h1 class="title">密碼產生器</h1>
             <div 
-                x-data="{setLength: '8'}"
                 class="setLength"
             >
-                <spna>長度</spna>
+                <span>長度</span>
                 <input 
-                    x-model="setLength"
-                    type="range" min="8" max="100"
+                    x-model.number="setLength"
+                    type="range" min="10" max="50"
                 >
                 <input 
-                    x-model="setLength"
-                    type="number" min="8" max="100"
+                    x-model.number="setLength"
+                    type="number" min="10" max="50"
                 >  
             </div>
             <div class="setToggle">
@@ -87,14 +86,22 @@
             <div class="outputWrap">
                 <p>密碼生成</p>
                 <div class="output">
-                    <span 
-                        x-text="password"
+                    <span
+                        x-text="getPassword"
                     ></span>
                 </div>
             </div>
             <div class="btnWrap">
-                <button>複製密碼</button>
-                <button>刷新密碼</button> 
+                <button 
+                    @click="copy" 
+                    :class="copyStatus == '複製成功'? 'copySuccess' : 'copy'"
+                    x-text="copyStatus"
+                    class="copyBtn"></button>
+                <button 
+                    @click="refresh"
+                    :class="refreshPassword ? 'refreshing' : 'refresh'"
+                    class="refresh"
+                    >刷新密碼</button> 
             </div>
 
         </section>
