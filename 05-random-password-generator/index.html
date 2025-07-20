@@ -9,49 +9,87 @@
         <script type="module" src="./script/all.js"></script>
     </head>
     <body>
-        <section>
+        <section 
+            x-data="generator"
+        >
             <h1 class="title">密碼產生器</h1>
-            <div class="setLength">
+            <div 
+                x-data="{setLength: '8'}"
+                class="setLength"
+            >
                 <spna>長度</spna>
-                
-                    <input type="range" min="8" max="100" value="34">
-                    <input type="number" min="8" max="100" value="34">  
-                
+                <input 
+                    x-model="setLength"
+                    type="range" min="8" max="100"
+                >
+                <input 
+                    x-model="setLength"
+                    type="number" min="8" max="100"
+                >  
             </div>
             <div class="setToggle">
                 <div>
-                    <label for="num">大寫</label>
-                    <div class="sliderWrap">
-                        <input id="num" type="checkbox" name="">
-                        <div class="sliderInside"></div>
+                    <span 
+                        @click="uppercase" 
+                        for="uppercase">
+                        大寫
+                    </span>
+                    <div
+                        @click="uppercase" 
+                        :class="upperToggle ? 'bg-green' : 'bg-white'"
+                        class="sliderWrap">
+                        <div
+                            :class="upperToggle ? 'right' : 'left'" 
+                            class="sliderInside"></div>
                     </div>
                 </div>
                 <div>
-                    <label for="num">小寫</label>
-                    <div class="sliderWrap">
-                        <input id="num" type="checkbox" name="">
-                        <div class="sliderInside"></div>
+                    <span 
+                        @click="lowercase"
+                        for="lowercase">小寫</span>
+                    <div
+                        @click="lowercase"
+                        :class="lowerToggle ? 'bg-green' : 'bg-white'"
+                        class="sliderWrap">
+                        <div 
+                            :class="lowerToggle ? 'right' : 'left'" 
+                            class="sliderInside"></div>
                     </div>
                 </div>
                 <div>
-                    <label for="num">符號</label>
-                    <div class="sliderWrap">
-                        <input id="num" type="checkbox" name="">
-                        <div class="sliderInside"></div>
+                    <span 
+                        @click="symbol"
+                        for="symbol">符號</span>
+                    <div 
+                        @click="symbol"
+                        :class="symbolToggle ? 'bg-green' : 'bg-white'"
+                        class="sliderWrap"
+                    >
+                        <div 
+                            :class="symbolToggle ? 'right' : 'left'" 
+                            class="sliderInside"></div>
                     </div>
                 </div>
                 <div>
-                    <label for="num">數字</label>
-                    <div class="sliderWrap">
-                        <input id="num" type="checkbox" name="">
-                        <div class="sliderInside"></div>
+                    <span 
+                        @click="number"
+                        for="number">數字</span>
+                    <div 
+                        @click="number"
+                        :class="numberToggle ? 'bg-green' : 'bg-white'"
+                        class="sliderWrap">
+                        <div 
+                            :class="numberToggle ? 'right' : 'left'"
+                            class="sliderInside"></div>
                     </div>
                 </div>
             </div>     
             <div class="outputWrap">
                 <p>密碼生成</p>
                 <div class="output">
-                    <span>11111111111111111111111111111111</span>
+                    <span 
+                        x-text="password"
+                    ></span>
                 </div>
             </div>
             <div class="btnWrap">
