@@ -11,7 +11,12 @@
     <script type="module" src="./script/all.js"></script>
     <body x-data="CalendarData">
         <div class="calendarWrap">
-            <h1>2025年七月</h1>
+            <h1 x-text="title"></h1>
+            <div class="buttonWrap">
+                <button @click="prev"><i class="fa-solid fa-caret-left"></i></button>
+                <button @click="backBegin"><i class="fa-solid fa-house"></i></button>
+                <button @click="next"><i class="fa-solid fa-caret-right"></i></button>
+            </div>
             <div class="weekWrap">
                 <ul>
                     <template x-for="week in weeks">
@@ -22,14 +27,10 @@
             <div class="daysWrap">
                 <ul>
                     <template x-for="day in days">
-                        <li x-text="day"></li>
+                        <li x-text="day" :class="day === '' ? 'colorNone' : 'displayColor'"></li>
                     </template>
                 </ul>
             </div>
-            <div class="buttonWrap">
-                <button><i class="fa-solid fa-caret-left"></i></button>
-                <button><i class="fa-solid fa-house"></i></button>
-                <button><i class="fa-solid fa-caret-right"></i></button>
-            </div>
         </div>
     </body>
+</html>

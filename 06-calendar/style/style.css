@@ -98,17 +98,27 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.displayColor{
     background-color: var(--color3);
     border: .5px solid var(--color2);
     border-radius: 5px;
     color: var(--color2);
 }
 
-.daysWrap li:hover{
+.displayColor:hover{
     transition: all .4s;
     border: 2px solid var(--color2);
     background-color: var(--color2);
     color: var(--color3);
+}
+
+.colorNone{
+    background-color: transparent;
+    border: none;
+    border-radius: none;
+    color: transparent;
 }
 
 .buttonWrap{
@@ -118,10 +128,10 @@ h1{
     gap: var(--gap);
     padding: 0 15px;
     justify-content: space-between;
+    margin: 15px 0;
 }
 
 .buttonWrap button{
-    margin-top: 7px;
     height: 30px;
     width: calc(100% / 7);
     background-color: var(--color3);
