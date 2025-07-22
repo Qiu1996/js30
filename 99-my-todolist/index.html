@@ -12,11 +12,10 @@
         <div
             x-data="todo_form"
         >
-        <div
-            x-show="status !== 'loginOn'"
-            >
+        <div>
             <form
-                    x-show="status == 'register'"
+                    x-cloak
+                    x-show="open('register')"
                     class="flex flex-col gap-2 items-center mt-10" action="https://todoo.5xcamp.us/users" method="post"
                 >
                     <input
@@ -32,22 +31,22 @@
                         class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="text" placeholder="暱稱" name="nickname"
                     >
                     <button 
-                        :disabled="!allowToSubmit"  
-                        @click.prevent="register" 
-                        :class="allowToSubmit ? 'bg-blue-500 cursor-not-allowed' : 'bg-gray-400 cursor-not-allowed'" 
-                        class="p-1 w-1/2 text-white rounded-md" type="submit">
+                        :disabled="!checkInput"  
+                        @click.prevent="register"
+                        class="p-1 w-1/2 text-white rounded-md btn bg-blue-500">
                         註冊
                     </button>
                     <footer>
                         已經有帳號？<a
-                            @click="goLogin"
+                            @click="go('login')"
                             class="text-blue-500" href="#"
                         >立即登入！</a>
                     </footer>
                 </form>
         
                 <form
-                    x-show="status == 'login'"
+                    x-cloak
+                    x-show="open('login')"
                     class="flex flex-col gap-2 items-center mt-10" action="https://todoo.5xcamp.us/users" method="post"
                 >
                     <input
@@ -59,22 +58,22 @@
                         class="p-1 text-center w-1/2 border-2 border-gray-300 rounded-md" type="password" placeholder="密碼" name="password"
                     >
                     <button 
-                        :disabled="!allowToSubmit" 
-                        :class="allowToSubmit ? 'bg-blue-500 cursor-not-allowed' : 'bg-gray-400 cursor-not-allowed'" 
-                        class="p-1 w-1/2 text-white rounded-md" type="submit" 
+                        :disabled="!checkInput" 
+                        class="p-1 w-1/2 text-white rounded-md btn bg-blue-500" type="submit" 
                         @click.prevent="login">
                         登入
                     </button>
                     <footer>
                         沒有帳號？<a
-                            @click="goRegister"
+                            @click="go('register')"
                             class="text-blue-500" href="#"
                         >立即註冊！</a>
                     </footer>
                 </form>
             </div>
             <div
-                x-show="status == 'loginOn'"
+                x-cloak
+                x-show="open('loginOn')"
                 class="p-10"
             >
                 <form class="flex gap-2 text-center" action="">
@@ -92,40 +91,37 @@
                     x-data="todos"
                 >
                     <template
-                        x-for="(todo, index) in todos"
+                        x-for="todo in todos"
                     >
                         <li class="flex w-full items-center border-2 border-gray-300 text-stone-500 rounded-md p-2 text-lg mb-2">
                             <div
-                                x-show="editingIndex !== index"
+                                x-cloak
+                                x-show="checkEditTodo !== todo.id"
                                 class="flex items-center flex-1 gap-2"
                             >
-                                <input
-                                    :id="index"
-                                    type="checkbox" class="mx-3"
-                                >
-                                <label
-                                    :for="index"
+                                <p
                                     x-text="todo.content"
-                                    class="cursor-pointer flex-1"
-                                ></label>
+                                    class="cursor-pointer flex-1 p-1"
+                                ></p>
                                 <button 
-                                    :disabled="editingStatus" 
+                                    :disabled="checkEditTodo !== null" 
                                     @click="deleteTodo(todo)" 
-                                    :class="editingIndex !== null ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 cursor-pointer'"  
-                                    class="cursor-pointer px-2 shrink-0 ml-2 py-1 bg-blue-500 text-white rounded-md" type="submit">
+                                    class="btn shrink-0 bg-blue-500 text-white rounded-md" type="submit">
                                     刪除
                                 </button>
+                                
                                 <button 
-                                    :disabled="editingStatus" 
-                                    @click="goEditTodo(todo)" 
-                                    :class="editingIndex !== null ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 cursor-pointer'" 
-                                    class="px-2 shrink-0 ml-2 py-1 text-white rounded-md" type="submit">
+                                :disabled="checkEditTodo !== null" 
+                                @click="goEditTodo(todo)" 
+                                
+                                    class="btn bg-blue-500 text-white rounded-md" type="submit">
                                     編輯
                                 </button>
                             </div>
-                            <!-- :class="editingIndex !== null ? 'bg-blue-500' : 'bg-gray-400' cursor-not-allowed'" -->
+                            
                             <div
-                                x-show="editingIndex == index"
+                                x-cloak
+                                x-show="checkEditTodo == todo.id"
                                 class="flex items-center flex-1 gap-2"
                             >
                                 <input
@@ -134,12 +130,12 @@
                                 >
                                 <button 
                                     @click="cancelEditTodo" 
-                                    class="cursor-pointer px-2 shrink-0 ml-2 py-1 bg-blue-500 text-white rounded-md" type="submit">
+                                    class="btn bg-blue-500 text-white rounded-md" type="submit">
                                     取消
                                 </button>
                                 <button 
                                     @click="finishEditTodo(todo)" 
-                                    class="cursor-pointer px-2 shrink-0 ml-2 py-1 bg-blue-500 text-white rounded-md" type="submit">
+                                    class="btn bg-blue-500 text-white rounded-md" type="submit">
                                     完成
                                 </button>
                             </div>
@@ -147,8 +143,8 @@
                     </template>
                 </ul>
                 <input
-                    class="fixed bottom-10 right-10 bg-blue-500 text-white rounded-md px-5 py-1" type="button" value="登出"
-                    @click="logout"
+                    class="fixed bottom-10 right-10 bg-blue-500 text-white rounded-md btn" type="button" value="登出"
+                    @click="go('logout')"
                 >
             </div>
         </div>

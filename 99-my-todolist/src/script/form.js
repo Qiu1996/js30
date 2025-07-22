@@ -14,7 +14,7 @@ const notyf = new Notyf({
 });
 
 const TodoForm = () => {return {
-    status: 'register',
+    status: 'login',
     email: '',
     password: '',
     nickname: '',
@@ -22,56 +22,30 @@ const TodoForm = () => {return {
     newTodo: '',
     editTodo: '',
     editingIndex: null,
-    async init(){
-        const token = localStorage.getItem('token');
-        if(token){
-            const url = 'https://todoo.5xcamp.us/todos';
-            const headers = {'Authorization': token};
-            const res = await axios.get(url, {
-                headers: headers
-            })
-            this.loginOn();
-            this.getTodos();
-        }else{
-            this.loginOff();
+    
+    open(status){
+        return status === this.status;
+    },
+    go(status){
+        if(status === 'logout'){
+            status = 'login';
+            localStorage.removeItem('token');
+            this.todos = [];
         }
+        this.status = status;
     },
-    init(){
-        console.log('init...');
-    },
-    get allowToSubmit(){
-        if(this.status === 'register'){
-            return this.email != "" && this.password != "" && this.nickname != "";
-        }else if(this.status === 'login'){
-            return this.email != "" && this.password != "";
+    get checkInput(){
+        switch(this.status){
+            case 'register':
+                return this.email != "" && this.password != "" && this.nickname != "";
+            case 'login':
+                return this.email != "" && this.password != "";
+            default:
+                return true;
         }
-        return true;
-    },
-    get editingStatus(){
-        return this.editingIndex !== null;
-    },  
-    goLogin() {
-        this.status = 'login'
-    },
-    goRegister() {
-        this.status = 'register'
-    },
-    loginOn(){
-        this.status = 'loginOn';
-    },
-    loginOff(){
-        this.status = 'login';
-    },
-    logout(){
-        this.status = 'login';
-        localStorage.removeItem('token');
-        // this.getTodos();
-        this.todos = [];
     },
     async register() {
-        console.log('register...');
-        
-        if(this.allowToSubmit){
+        if(this.checkInput){
             const url = "https://todoo.5xcamp.us/users";
             const userData = {
                 'user': {
@@ -84,46 +58,67 @@ const TodoForm = () => {return {
                 const res = await axios.post(url, userData);
                 notyf.success(`${res.data.message}<br>歡迎加入，${res.data.nickname}`);
                 console.log(`註冊成功`);
-            }catch(err){
-                // console.log(err.response.data.message);
-                // console.log(err.response.data.error[0]);
 
+                this.email = '';
+                this.password = '';
+                this.nickname = '';
+                this.go('login');
+            }catch(err){
                 notyf.error(`${err.response.data.message}<br>${err.response.data.error[0]}`);
-                console.log(err);
-            }
+                console.log(`失敗${err}`);
+            }    
         }
         
-        Object.assign(this, {
-            email: '',
-            password: '',
-            nickname: '',
-        });
     },
-    login() {
-        axios.post('https://todoo.5xcamp.us/users/sign_in', {
-            "user": {
-                "email": this.email,
-                "password": this.password,
+    async login() {
+        if(this.checkInput){
+            const url = 'https://todoo.5xcamp.us/users/sign_in';
+            const userData = {
+                "user": {
+                    "email": this.email,
+                    "password": this.password,
+                }
+            };
+            try{
+                const res = await axios.post(url, userData);
+                // 登入成功
+                notyf.success(`${res.data.message}<br>歡迎回來! ${res.data.nickname}`);
+                // 儲存 Token
+                localStorage.setItem('token', res.headers.authorization);
+                this.go('loginOn');
+                this.getTodos();
+            }catch{
+                // 登入失敗
+                notyf.error(`${err.response.data.message}`);
+                console.log(err);
             }
-        })
-        .then(res => {
-            // 登入成功
-            notyf.success(`${res.data.message}<br>歡迎回來! ${res.data.nickname}`);
-            // 儲存 Token
-            localStorage.setItem('token', res.headers.authorization);
-            this.loginOn();
+            console.log('login...');
+        }
+    },
+    init(){
+        console.log('init...');
+        const token = localStorage.getItem('token');
+        if(token){
+            this.setHeader(token);
+            this.go('loginOn');
             this.getTodos();
-        })
-        .catch(err => {
-            // 登入失敗
-            notyf.error(`${err.response.data.message}`);
+        }else{
+            this.go('login');
+        }
+    },
+    setHeader(token){
+        axios.defaults.headers.common["Authorization"] = token
+    },
+    async getTodos(){
+        try{
+            const url = 'https://todoo.5xcamp.us/todos';
+            const res = await axios.get(url);
+            const resTodos = res.data.todos;
+            this.todos = resTodos;
+            console.log(`獲得資料成功`);
+        }catch(err){
             console.log(err);
-        });
-        console.log('login...');
-        Object.assign(this, {
-            email: '',
-            password: '',
-        });
+        }
     },
     // 新增 Todo
     async addTodo(){
@@ -131,54 +126,18 @@ const TodoForm = () => {return {
             const notyf = new Notyf();
             notyf.error(`輸入框不可為空`);
             return;
-
         }
-        const token = localStorage.getItem('token');
+
         const url = 'https://todoo.5xcamp.us/todos';
         const todoData = {'todo': {'content': this.newTodo}};
-        const headers = {'Authorization': token}
         try{
-            await axios.post(url, todoData, {headers: headers});
+            await axios.post(url, todoData);
             console.log(`新增成功`);
-        }catch(err){
-            console.log(err);
-        }
-        this.getTodos();
-        this.newTodo = '';
-    },
-    async getTodos(){
-        try{
-            const token = localStorage.getItem('token');
-            const headers = {'Authorization': token}
-            const url = 'https://todoo.5xcamp.us/todos';
-            const res = await axios.get(url, {headers: headers});
-            const resTodos = res.data.todos;
-            this.todos = resTodos;
-            // console.log(resTodos[0].id);
-            console.log(this.todos);
-        }catch(err){
-            console.log(err);
-        }
-    },
-    async deleteTodo(todo){
-        try{
-            const token = localStorage.getItem('token');
-            const headers = {'Authorization': token};
-            const url = `https://todoo.5xcamp.us/todos/${todo.id}`;
-            await axios.delete(url, {headers: headers});
-            console.log(`${todo.id} 刪除成功`);
-
             this.getTodos();
+            this.newTodo = '';
         }catch(err){
             console.log(err);
         }
-    },
-    goEditTodo(todo){
-        this.editingIndex = todo.id;
-        console.log(this.editTodo);
-    },
-    cancelEditTodo(){
-        this.editingIndex = null;
     },
     async finishEditTodo(todo){
         if(this.editTodo.trim() === ''){
@@ -187,23 +146,44 @@ const TodoForm = () => {return {
             return
         }
         try {
-            const token = localStorage.getItem('token');
-            const headers = {'Authorization': token};
             const url = `https://todoo.5xcamp.us/todos/${todo.id}`;
             const todoData = {'todo': {'content': this.editTodo}};
             
-            await axios.put(url, todoData, {headers: headers});
+            await axios.put(url, todoData);
             console.log(`編輯成功`);
             
-            // 重新獲取最新的 todos 資料來更新 UI
-            await this.getTodos();
+            
+            this.editingIndex = null;
+            this.editTodo = '';
+            this.getTodos();
         } catch(err) {
             console.log(err);
         }
-        
+    },
+    
+    async deleteTodo(todo){
+        try{
+            const url = `https://todoo.5xcamp.us/todos/${todo.id}`;
+            await axios.delete(url);
+            console.log(`${todo.id} 刪除成功`);
+
+            this.getTodos();
+        }catch(err){
+            console.log(err);
+        }
+    },
+
+    get checkEditTodo(){
+        return this.editingIndex;
+    },
+    goEditTodo(todo){
+        this.editingIndex = todo.id;
+        console.log(this.editTodo);
+    },
+    cancelEditTodo(){
         this.editingIndex = null;
-        this.editTodo = '';
-    }
+    },
+
 }}
 
 export { TodoForm };
