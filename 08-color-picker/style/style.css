@@ -27,3 +27,12 @@ input,
 button {
   padding: 5px;
 }
+
+.message_copySuccess::after {
+  content: "複製成功";
+  color: #FF0000;
+}
+
+.message::after {
+  content: "點擊色碼即可複製";
+}
