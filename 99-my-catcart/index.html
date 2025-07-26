@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Qiu YaQi">
+    <title>5xClass Qiu's CatCart</title>
+    <link href="./style/style.css" rel="stylesheet">
+  </head>
+  <script type="module" src="./script/all.js"></script>
+
+  <body class="p-20">
+    <div class="navbar">
+      <div class="flex-1">
+        <a class="btn text-xl">CarCart</a>
+      </div>
+      <div class="dropdown dropdown-end mr-5">
+        <div tabindex="0" role="button" class="btn btn-ghost">
+          <div class="indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /> </svg>
+            <span class="badge badge-sm indicator-item">8</span>
+          </div>
+        </div>
+        <div
+          tabindex="0"
+          class="card card-compact dropdown-content bg-base-100 z-1 mt-3 shadow">
+          <div class="card-body p-2">
+              <table class="table w-100">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>名字</th>
+                    <th>數量</th>
+                    <th>手續費</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- row 1 -->
+                  <tr>
+                    <td>貓貓</td>
+                    <td>
+                      <input type="number" min="0" max="5" name="" id="" value="0">
+                    </td>
+                    <td>$20</td>
+                  </tr>
+                  <!-- row 2 -->
+                  <tr>
+                    <td>貓貓</td>
+                    <td>
+                      <input type="number" min="0" max="5" name="" id="" value="0">
+                    </td>
+                    <td>$20</td>
+                  </tr>
+                  <!-- row 3 -->
+                  <tr>
+                    <td>貓貓</td>
+                    <td>
+                      <input type="number" min="0" max="5" name="" id="" value="0">
+                    </td>
+                    <td>$20</td>
+                  </tr>
+                  <tr>
+                    <th colspan="2">
+                      總價
+                    </th>
+                    <th>$60</th>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="flex flex-col gap-2 w-100">
+                <button class="btn">結帳</button>
+                <button class="btn ">清空</button>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown dropdown-end">
+            <button tabindex="0" role="button" class="btn avatar">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="dropdown_svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg>
+            </button>
+        <ul
+          tabindex="0"
+          class="menu dropdown-content ">
+          <li><a>Login</a></li>
+          <li><a>Register</a></li>
+        </ul> 
+      </div>
+    </div>
+
+    <h2>歡迎認購～</h2>
+    <div class="cards-wrap">
+      <div class="card">
+        <figure>
+          <img
+            src="https://picsum.photos/200"
+            alt="cat" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">貓貓</h2>
+          <p>$20</p>
+          <div class="card-actions justify-end">
+            <button class="btn-primary">認養</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <figure>
+          <img
+            src="https://picsum.photos/200"
+            alt="cat" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">貓貓</h2>
+          <p>$20</p>
+          <div class="card-actions justify-end">
+            <button class="btn-primary">認養</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <figure>
+          <img
+            src="https://picsum.photos/200"
+            alt="cat" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">貓貓</h2>
+          <p>$20</p>
+          <div class="card-actions justify-end">
+            <button class="btn-primary">認養</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
