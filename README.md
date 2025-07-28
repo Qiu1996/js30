@@ -14,7 +14,7 @@
 | 05.  | [Randow Password Generator](./05-randow-password-generator) | [CodePen](https://codepen.io/Quuui/pen/ZYbQjYj) | 20250720 | `AlpineJS` |
 | 06.  | [Calendar](./06-calendar) | [CodePen](https://codepen.io/Quuui/pen/zxvrXJN) | 20250721 | `AlpineJS` |
 | 07.  | [Css Variables](./07-css-variables) | [CodePen](https://codepen.io/Quuui/pen/pvjEXeN) | 20250722 | `原生JS` |
-| 08.  | [Color-Picker](./08-color-picker) | [CodePen](https://codepen.io/Quuui/pen/empdwWE) | 20250723 | `原生JS` |
+| 08.  | [Color-Picker](./08-color-picker) | [CodePen](https://codepen.io/Quuui/pen/empdwWE) | 20250726 | `原生JS` |
 | 09.  | [Array Cardio Day 1](09-array-cardio-day1) | [CodePen](https://codepen.io/Quuui/pen/ogjxBbr) | 20250728 | `陣列函式練習` |
 
 
