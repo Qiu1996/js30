@@ -5,13 +5,17 @@
 ---
 ### 30 個小項目
 
-| Day |           GitHub Link          | CodePen Link | CreateDate | Tag     |
+| No. |           GitHub Link          | CodePen Link | CreateDate | Tag     |
 | --- | -----------------------------  | ------------ | ---------- | ------- |
-| 1.  | [Durm Kit](./01-durm-kit)      |              | 20250716   | `原生JS` |
-| 2.  | [Clock](./02-clock)            | [CodePen](https://codepen.io/Quuui/pen/empJjYj) | 20250717 | `原生JS` |
-| 3.  | [Random Color Generator](./03-random-color-generator) | [CodePen](https://codepen.io/Quuui/pen/YPywjPP) | 20250718 | `原生JS` |
-| 4.  | [Digital Clock](./04-digital-clock) | [CodePen](https://codepen.io/Quuui/pen/bNVEjNW) | 20250719 | `原生JS` |
-| 5.  | [Randow Password Generator](./05-randow-password-generator) | [CodePen](https://codepen.io/Quuui/pen/ZYbQjYj) | 20250720 | `AlpineJS` |
+| 01.  | [Durm Kit](./01-durm-kit)      |              | 20250716   | `原生JS` |
+| 02.  | [Clock](./02-clock)            | [CodePen](https://codepen.io/Quuui/pen/empJjYj) | 20250717 | `原生JS` |
+| 03.  | [Random Color Generator](./03-random-color-generator) | [CodePen](https://codepen.io/Quuui/pen/YPywjPP) | 20250718 | `原生JS` |
+| 04.  | [Digital Clock](./04-digital-clock) | [CodePen](https://codepen.io/Quuui/pen/bNVEjNW) | 20250719 | `原生JS` |
+| 05.  | [Randow Password Generator](./05-randow-password-generator) | [CodePen](https://codepen.io/Quuui/pen/ZYbQjYj) | 20250720 | `AlpineJS` |
+| 06.  | [Calendar](./06-calendar) | 20250721 | [CodePen](https://codepen.io/Quuui/pen/zxvrXJN) | `AlpineJS` |
+| 07.  | [Css Variables](./07-css-variables) | [CodePen](https://codepen.io/Quuui/pen/pvjEXeN) | 20250722 | `原生JS` |
+| 08.  | [Color-Picker](./08-color-picker) | [CodePen](https://codepen.io/Quuui/pen/empdwWE) | 20250723 | `原生JS` |
+| 09.  | [Array Cardio Day 1](09-array-cardio-day1) | (CodePen)[https://codepen.io/Quuui/pen/ogjxBbr] | 20250728 | `陣列函式練習` |
 
 
 ### Other 額外
