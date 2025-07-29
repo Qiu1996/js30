@@ -16,6 +16,7 @@
 | 07.  | [Css Variables](./07-css-variables) | [CodePen](https://codepen.io/Quuui/pen/pvjEXeN) | 20250722 | `原生JS` |
 | 08.  | [Color-Picker](./08-color-picker) | [CodePen](https://codepen.io/Quuui/pen/empdwWE) | 20250726 | `原生JS` |
 | 09.  | [Array Cardio Day 1](09-array-cardio-day1) | [CodePen](https://codepen.io/Quuui/pen/ogjxBbr) | 20250728 | `陣列函式練習` |
+| 10.  | [Flex Panel Gallery](./10-flex-panel-gallery/) | [CodePen](https://codepen.io/Quuui/pen/pvjEmKv) | 20250729 | `Cubic Bezier` |
 
 
 ### Other 額外
