@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Qiu YaQi">
+        <title>Document</title>
+        <link rel="stylesheet" href="./style/style.css">
+        <template class="select-template">
+            <option></option>
+        </template>
+    </head>
+    <script type="module" src="./script/all.js"></script>
+    <body>
+        <div class="container">
+            <div class="select_container">
+                <select name="select_city" class="select_city" placeholder="請選擇縣市">
+                    <option value="" selected disabled>請選擇縣市</option>
+                </select>
+                <select name="select_town" class="select_town" placeholder="請選擇鄉鎮市區">
+                    <option value="" selected disabled>請選擇鄉鎮市區</option>
+                </select>
+            </div>
+            <div>
+                <h2>搜尋結果</h2>
+                <div class="result">
+                    <p>年底人口數：<span class="result_people"></span></p>
+                    <p>土地面積：<span class="result_area"></span></p>
+                    <p>人口密度：<span class="result_density"></span></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
