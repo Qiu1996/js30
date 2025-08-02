@@ -1,0 +1,26 @@
+.container{
+  width: 200px;
+
+  margin: 50px auto;
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.circle{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #000;
+
+  transition: all .5s;
+
+  cursor: pointer;
+}
+
+.grow{
+  background-color: #fff;
+}
