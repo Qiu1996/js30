@@ -1,0 +1,66 @@
+circle(4, 5) => offsetCircle(4, 5)
+
+offsetCircle(targetR = 4, targetC = 5) {
+  topR    = targetR - 4 (0) , topC     = targetC (5) 
+  bottomR = targetR + 4 (8) , bottomc  = targetC (5)
+  leftR   = targetR (4)     , leftC    = targetC - 4 (1)
+  rightR  = targetR (4)     , rightC   = targetC + 4 (9)
+
+  shrink(topR, topC, targetR, targetC)        --> (0, 5, 4, 5)
+  shrink(bottomR, bottomC, targetR, targetC) --> (8, 5, 4, 5) 
+  shrink(leftR, leftC, targetR, targetC)      --> (4, 1, 4, 5)
+  shrink(rightR, leftC, targetR, targetC)     --> (4, 9, 4, 5)
+}
+
+rows = 20, cols = 20
+
+!!!=== shrink(0, 5, 4, 5) 第一次遞迴 ===!!!
+shrink(offsetR, offsetC, targetR, targetC) == shrink(0, 5, 4, 5){
+  if(
+    // offsetR = 0 !== r = 4 --> true
+    offsetR !== r &&
+
+    // circlesArr[0][4] 的 classList 是否包含 grow
+    circlesArr[offsetR][offsetC].classList.contains("grow");
+  ){
+    
+    circlesArr[offsetR][offsetC].classList.add('grow');
+     
+    //  distanceToTarget --> 計算到達目標點的距離
+    //  distanceToTarget = Math.abs(0 - 4) + Math.abs(5 - 5)
+    //  distanceToTarget => 4
+    distanceToTarget = Math.abs(offsetR - targetR) + Math.abs(offsetC - targetC);
+
+    // 如果沒到達目標點，繼續遞迴
+    // 4 > 0
+    if(distanceToTarget > 0){
+      setTimeout(() => {
+        // newR = 0 + (if 0 > 4 就 +1 else if 0 < 4 則 -1)
+        
+        // newR = 0 + 1
+        const newR = offsetR + (targetR > offsetR ? 1 : targetR < offsetR ? -1 : 0);
+        // newC = 5 + 0
+        const newC = offsetC + (targetC > offsetC ? 1 : targetC < offsetC ? -1 : 0);
+
+        // shrink(1, 5, 4, 5) --> 進入遞迴第二次
+        shrink(newR, newC, targetR, targetC);
+      }, 200)
+    }
+  }
+}
+
+!!!=== shrink(1, 5, 4, 5) 第二次遞迴 ===!!!
+shrink(offsetR, offsetC, targetR, targetC)
+
+
+
+//  (0, 0) (0, 1) (0, 2) (0, 3) (0, 4) (0, 5) (0, 6) (0, 7) (0, 8) (0, 9)
+//  (1, 0) (1, 1) (1, 2) (1, 3) (1, 4) (1, 5) (1, 6) (1, 7) (1, 8) (1, 9)
+//  (2, 0) (2, 1) (2, 2) (2, 3) (2, 4) (2, 5) (2, 6) (2, 7) (2, 8) (2, 9)
+//  (3, 0) (3, 1) (3, 2) (3, 3) (3, 4) (3, 5) (3, 6) (3, 7) (3, 8) (3, 9)
+//  (4, 0) (4, 1) (4, 2) (4, 3) (4, 4) (4, 5) (4, 6) (4, 7) (4, 8) (4, 9)
+//  (5, 0) (5, 1) (5, 2) (5, 3) (5, 4) (5, 5) (5, 6) (5, 7) (5, 8) (5, 9)
+//  (6, 0) (6, 1) (6, 2) (6, 3) (6, 4) (6, 5) (6, 6) (6, 7) (6, 8) (6, 9)
+//  (7, 0) (7, 1) (7, 2) (7, 3) (7, 4) (7, 5) (7, 6) (7, 7) (7, 8) (7, 9)
+//  (8, 0) (8, 1) (8, 2) (8, 3) (8, 4) (8, 5) (8, 6) (8, 7) (8, 8) (8, 9) 
+//  (9, 0) (9, 1) (9, 2) (9, 3) (9, 4) (9, 5) (9, 6) (9, 7) (9, 8) (9, 9)
