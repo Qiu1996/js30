@@ -1,8 +1,5 @@
 # js-30
 
-
-
----
 ### 30 個小項目
 
 | No. |           GitHub Link          | CodePen Link | CreateDate | Tag     |
@@ -35,5 +32,9 @@
 | --- | -----------------------------  | ------------ | ------- |
 |99.  | [Todo List](./99-my-todolist) | [CodePen](https://codepen.io/Quuui/pen/OPyMwNp) | `AlpineJS` `TailwindCSS` `Axios` `Notyf` |
 
+
+### 參考
+- [30DaysOfJavaScript](https://github.com/swapnilsparsh/30DaysOfJavaScript)
+- [JavaScript30](https://github.com/wesbos/JavaScript30)
 
 
