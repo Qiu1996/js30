@@ -8,8 +8,9 @@ div {
   margin: 50px auto;
 }
 
-.result {
+.result div {
   text-align: right;
+  height: 20px;
 }
 
 .btn_wrap {
