@@ -5,35 +5,24 @@ const el_result = document.querySelector(".result div");
 el_btnWrap.addEventListener("click", e => {
   switch(e.target.dataset.action){
     case "clear":
-      clear();
+      el_result.innerText = '';
       break;
     case "num":
-      let resultStr = addStr(e.target.textContent);
+      el_result.innerText = addNum(e.target.textContent);
       break;
     
   }
 })
 
-
 function clear(){
-  result('0');
+
 }
 
-function addStr(textContent){
+const addNum = ((text) => {
   let str = '';
 
-  function(){
-    str += textContent;
+  return (text) => {
+    str += text;
+    return str;
   }
-
-  return str;
-}
-
-function result(str){
-  el_result.innerText = str;
-}
-
-
-
-
-
+})();
