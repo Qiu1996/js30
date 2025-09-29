@@ -5,7 +5,7 @@ const el_result = document.querySelector(".result div");
 el_btnWrap.addEventListener("click", e => {
   switch(e.target.dataset.action){
     case "clear":
-      el_result.innerText = '';
+      el_result.innerText = '0';
       break;
     case "num":
       el_result.innerText = addNum(e.target.textContent);
@@ -13,10 +13,6 @@ el_btnWrap.addEventListener("click", e => {
     
   }
 })
-
-function clear(){
-
-}
 
 const addNum = ((text) => {
   let str = '';
