@@ -40,11 +40,11 @@ function fn_default(target){
 function fn_equal(){
   let str = el_result.innerText.replace(/x/g, '*');
   if(!/^[0-9+\-*/%.()\s]+$/.test(str)){
-    return
+    return;
   }
   try{
     el_result.innerText = Function(`"use strict"; return (${str})`)();
   }catch{
-    return
+    return;
   }
 }
