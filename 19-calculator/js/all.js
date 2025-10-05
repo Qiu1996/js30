@@ -38,9 +38,12 @@ function fn_default(target){
 }
 
 function fn_equal(){
+  let str = el_result.innerText.replace(/x/g, '*');
+  if(!/^[0-9+\-*/%.()\s]+$/.test(str)){
+    return
+  }
   try{
-    let str = el_result.innerText.replace(/x/g, '*');
-    el_result.innerText = eval(str);
+    el_result.innerText = Function(`"use strict"; return (${str})`)();
   }catch{
     return
   }
