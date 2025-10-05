@@ -11,27 +11,36 @@ el_btnWrap.addEventListener("click", e => {
       fn_equal()
       break;
     default:
-      fn_default(e.target.textContent);
+      fn_default(e.target);
       break;
     
   }
 })
 
-function fn_default(text){
+function fn_default(target){
   let str = el_result.innerText;
   el_result.innerText = str === "0" ? "" : str;
   
-  if(text === "+" || text === "-"){
-    if(str[str.length-1] === "+" || str[str.length-1] === "-"){
-      el_result.innerText = str.slice(0, -1);
-    } 
+  if(target.dataset.action === "operators"){
+    switch(str[str.length-1]){
+      case "x":
+      case "/":
+        if(target.textContent !== "-"){
+          el_result.innerText = str.slice(0, -1);
+        }
+        break;
+      case "+":
+      case "-":
+        el_result.innerText = str.slice(0, -1);
+    }
   }
-  el_result.innerText += text;
+  el_result.innerText += target.textContent;
 }
 
 function fn_equal(){
   try{
-    el_result.innerText = eval(el_result.innerText);
+    let str = el_result.innerText.replace(/x/g, '*');
+    el_result.innerText = eval(str);
   }catch{
     return
   }
