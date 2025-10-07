@@ -1,5 +1,6 @@
 const el_btnWrap = document.querySelector(".btn_wrap");
 const el_result = document.querySelector(".result div"); 
+let is_reset = false;
 
 
 el_btnWrap.addEventListener("click", e => {
@@ -8,7 +9,8 @@ el_btnWrap.addEventListener("click", e => {
       el_result.innerText = '0';
       break;
     case "equal":
-      fn_equal()
+      fn_equal();
+      is_reset = true;
       break;
     default:
       fn_default(e.target);
@@ -18,6 +20,10 @@ el_btnWrap.addEventListener("click", e => {
 })
 
 function fn_default(target){
+  if(is_reset){
+    el_result.innerText = '0';
+    is_reset = false;
+  }
   let str = el_result.innerText;
   el_result.innerText = str === "0" ? "" : str;
   
