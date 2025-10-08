@@ -42,7 +42,8 @@ class Calculator {
     if(this.displayValue === '0'){
       return;
     }
-    this.displayValue = this.displayValue.replace(/x/g, '*');
+    this.displayValue = this.displayValue.replace(/x/g, '*').replace(/%/g, '/100');
+    console.log(this.displayValue);
     try{
       let result = Function(`"use strict"; return (${this.displayValue})`)();
       this.lastNum = result;
@@ -79,7 +80,7 @@ class Display{
 
 class Validator{
   isValidChar(value){
-    return /^[\d+\-x/.]$/.test(value);
+    return /^[\d+\-x/.%]$/.test(value);
   }
 }
 
