@@ -5,37 +5,62 @@ class Calculator {
 
   reset(){
     this.displayValue = '0';
-    this.operator = false;
-  }
-
-  getDisplayValue(){
-    return this.displayValue;
+    this.lastIsOperator = false;
+    this.firstNum = '';
+    this.lastNum = '';
+    this.toggleNegative = false;
   }
 
   inputNumber(value){
-    this.displayValue = this.displayValue === '0' ? value : this.displayValue + value;
-    this.operator = false;
+    this.lastNum += value;
+    this.displayValue = this.displayValue === '0' ? '' + this.lastNum : this.firstNum + this.lastNum;
+    this.lastIsOperator = false;
   }
 
   inputOperators(value){
-    if(this.operator){
+    if(this.lastIsOperator){
       return;
     }
-    this.displayValue = this.displayValue === "0" ? "0" + value : this.displayValue + value;
-    this.operator = true;
-  }
 
-  clear(){
-    this.displayValue = '0';
+    if(this.toggleNegative){
+      this.lastNum = `(-${this.lastNum})`;
+      this.toggleNegative = false;
+    }
+    
+    if(this.displayValue === '0'){
+      this.firstNum = '0' + value;
+    }else{
+      this.firstNum += this.lastNum + value;
+    }
+
+    this.displayValue = this.firstNum;
+    this.lastNum = '';
+    this.lastIsOperator = true;
   }
 
   performEqual(){
+    if(this.displayValue === '0'){
+      return;
+    }
     this.displayValue = this.displayValue.replace(/x/g, '*');
     try{
-      let result = Function(`"use strict"; return (${this.displayValue})`)();
-      this.displayValue = result;
+      this.lastNum = Function(`"use strict"; return (${this.displayValue})`)();
+      this.displayValue = this.lastNum;
+      this.firstNum = '';
     }catch{
       return;
+    }
+  }
+
+  toggleSign(){
+    if(this.lastNum !== ''){
+      if(this.toggleNegative){
+        this.displayValue = `${this.firstNum}${this.lastNum}`;
+        this.toggleNegative = false;
+      }else{
+        this.displayValue = `${this.firstNum}(-${this.lastNum})`;
+        this.toggleNegative = true;
+      }
     }
   }
 }
@@ -62,7 +87,7 @@ const btnWrap = document.querySelector('.btn_wrap');
 const validator = new Validator();
 
 function updateDisplay(){
-  display.update(calculator.getDisplayValue());
+  display.update(calculator.displayValue);
 }
 
 btnWrap.addEventListener('click', (e) => {
@@ -72,7 +97,7 @@ btnWrap.addEventListener('click', (e) => {
 
   switch(action){
     case 'clear':
-      calculator.clear();
+      calculator.reset();
       updateDisplay();
       break;
     
@@ -89,10 +114,12 @@ btnWrap.addEventListener('click', (e) => {
       updateDisplay();
       break;
 
-    case 'pencent':
+    case 'percent':
       break;  
 
     case 'toggle':
+      calculator.toggleSign();
+      updateDisplay();
       break;
 
     default:
