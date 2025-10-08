@@ -21,7 +21,7 @@ class Calculator {
     if(this.operator){
       return;
     }
-    this.displayValue = this.displayValue === "0" ? "0" : this.displayValue + value;
+    this.displayValue = this.displayValue === "0" ? "0" + value : this.displayValue + value;
     this.operator = true;
   }
 
@@ -31,8 +31,12 @@ class Calculator {
 
   performEqual(){
     this.displayValue = this.displayValue.replace(/x/g, '*');
-    let result = Function(`"use strict"; return (${this.displayValue})`)();
-    this.displayValue = result;
+    try{
+      let result = Function(`"use strict"; return (${this.displayValue})`)();
+      this.displayValue = result;
+    }catch{
+      return;
+    }
   }
 }
 
@@ -46,9 +50,16 @@ class Display{
   }
 }
 
+class Validator{
+  isValidChar(value){
+    return /^[\d+\-x/.]$/.test(value);
+  }
+}
+
 const calculator = new Calculator();
 const display = new Display(document.querySelector('.result div'));
 const btnWrap = document.querySelector('.btn_wrap');
+const validator = new Validator();
 
 function updateDisplay(){
   display.update(calculator.getDisplayValue());
@@ -66,6 +77,9 @@ btnWrap.addEventListener('click', (e) => {
       break;
     
     case 'operators':
+      if(!validator.isValidChar(value)){
+        break;
+      }
       calculator.inputOperators(value);
       updateDisplay();
       break;
@@ -75,7 +89,16 @@ btnWrap.addEventListener('click', (e) => {
       updateDisplay();
       break;
 
+    case 'pencent':
+      break;  
+
+    case 'toggle':
+      break;
+
     default:
+      if(!validator.isValidChar(value)){
+        break;
+      }
       calculator.inputNumber(value);
       updateDisplay();
       break;
