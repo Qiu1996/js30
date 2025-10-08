@@ -12,6 +12,12 @@ class Calculator {
   }
 
   inputNumber(value){
+    if(value === '.'){
+      if(this.lastNum.includes('.')){
+        return;
+      }
+    }
+
     this.lastNum += value;
     this.displayValue = this.displayValue === '0' ? this.lastNum : this.firstNum + this.lastNum;
     this.lastIsOperator = false;
@@ -43,9 +49,9 @@ class Calculator {
       return;
     }
     this.displayValue = this.displayValue.replace(/x/g, '*').replace(/%/g, '/100');
-    console.log(this.displayValue);
     try{
       let result = Function(`"use strict"; return (${this.displayValue})`)();
+      result = Math.round(result * 1e10) / 1e10;
       this.lastNum = result;
       this.displayValue = result;
       this.firstNum = '';
@@ -117,7 +123,9 @@ btnWrap.addEventListener('click', (e) => {
       updateDisplay();
       break;
 
-    case 'percent':
+    case 'dot':
+      calculator.inputNumber(value);
+      updateDisplay();
       break;  
 
     case 'toggle':
