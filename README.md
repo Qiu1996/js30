@@ -22,7 +22,7 @@
 | 16.  | [HTML5 Canvas](./16-html5-canvas) | [CodePen](https://codepen.io/Quuui/pen/myeqomd)| 20250805 | `原生JS` `Canvar` |
 | 17.  | [Hold Shift Allcheck](./17-hold-shift-allcheck) | [CodePen](https://codepen.io/Quuui/pen/OPyOqjN)| 20250807 | `原生JS`|
 | 18.  | [Word Counter](./18-word-counter) | [CodePen](https://codepen.io/Quuui/pen/YPyNZRy)| 20250814 | `原生JS`|
-| 19.  | [Word Counter](./19-calculator) | [CodePen](https://codepen.io/Quuui/pen/yyeLLmQ)| 20251008 | `原生JS` `ES6 Class` `狀態管理`|
+| 19.  | [Calculator](./19-calculator) | [CodePen](https://codepen.io/Quuui/pen/yyeLLmQ)| 20251008 | `原生JS` `ES6 Class` `狀態管理`|
 
 
 
