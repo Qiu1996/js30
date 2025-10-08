@@ -13,7 +13,7 @@ class Calculator {
 
   inputNumber(value){
     this.lastNum += value;
-    this.displayValue = this.displayValue === '0' ? '' + this.lastNum : this.firstNum + this.lastNum;
+    this.displayValue = this.displayValue === '0' ? this.lastNum : this.firstNum + this.lastNum;
     this.lastIsOperator = false;
   }
 
@@ -44,9 +44,11 @@ class Calculator {
     }
     this.displayValue = this.displayValue.replace(/x/g, '*');
     try{
-      this.lastNum = Function(`"use strict"; return (${this.displayValue})`)();
-      this.displayValue = this.lastNum;
+      let result = Function(`"use strict"; return (${this.displayValue})`)();
+      this.lastNum = result;
+      this.displayValue = result;
       this.firstNum = '';
+      this.toggleNegative = false;
     }catch{
       return;
     }
