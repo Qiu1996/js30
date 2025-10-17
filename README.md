@@ -8,7 +8,7 @@
 | 02.  | [Clock](./02-clock)            | [CodePen](https://codepen.io/Quuui/pen/empJjYj) | 20250717 | `原生JS` |
 | 03.  | [Random Color Generator](./03-random-color-generator) | [CodePen](https://codepen.io/Quuui/pen/YPywjPP) | 20250718 | `原生JS` |
 | 04.  | [Digital Clock](./04-digital-clock) | [CodePen](https://codepen.io/Quuui/pen/bNVEjNW) | 20250719 | `原生JS` |
-| 05.  | [Randow Password Generator](./05-randow-password-generator) | [CodePen](https://codepen.io/Quuui/pen/ZYbQjYj) | 20250720 | `AlpineJS` |
+| 05.  | [Random Password Generator](./05-random-password-generator) | [CodePen](https://codepen.io/Quuui/pen/ZYbQjYj) | 20250720 | `AlpineJS` |
 | 06.  | [Calendar](./06-calendar) | [CodePen](https://codepen.io/Quuui/pen/zxvrXJN) | 20250721 | `AlpineJS` |
 | 07.  | [Css Variables](./07-css-variables) | [CodePen](https://codepen.io/Quuui/pen/pvjEXeN) | 20250722 | `原生JS` |
 | 08.  | [Color-Picker](./08-color-picker) | [CodePen](https://codepen.io/Quuui/pen/empdwWE) | 20250726 | `原生JS` |
