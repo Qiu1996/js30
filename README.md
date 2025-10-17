@@ -31,7 +31,7 @@
 
 | Day |           GitHub Link          | CodePen Link | Tag     |
 | --- | -----------------------------  | ------------ | ------- |
-|99.  | [Todo List](./99-my-todolist) | [CodePen](https://codepen.io/Quuui/pen/OPyMwNp) | `AlpineJS` `TailwindCSS` `Axios` `Notyf` |
+|99.  | [Todo List](./99-alpine-todolist) | [CodePen](https://codepen.io/Quuui/pen/OPyMwNp) | `AlpineJS` `TailwindCSS` `Axios` `Notyf` |
 
 
 ### 參考
